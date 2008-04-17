@@ -55,3 +55,7 @@ Here is the list of open issues:
  # In a more sophisticated implementation, some space can be saved even with all fixed-size columns if many of them have NULL value, as long as these columns are not used in indexes
  # In variable-size format status should be moved to lower bits of the "next" pointer. Pointer is always aligned to {{{sizeof(byte*)}}}, which is at least 4, leaving 2 lower bits free. This will save 8 bytes per chunk on 64-bit platform.
  # As we do not want to modify FRM format, BLOCK_SIZE option of "CREATE TABLE" is saved as "RAID_CHUNKSIZE" for Heap Engine tables.
+
+==Source==
+
+Master copy of this discussion is in heap\hp_dspace.c.
