@@ -1,0 +1,8 @@
+#labels Featured
+=Notes On The Patch Format=
+
+Attached ZIP (see [http://code.google.com/p/mysql-heap-dynamic-rows/downloads/list Downloads] section) contains all modified source files and a diff - all based on Unix 5.0.45 version of MySQL source code. DIFF was made using GNU DIFF (with -upraN options). I could not find free bitkeeper for Windows or Solaris. However, with complete source files you should be able to run BitKeeper? DIFF if necessary.
+
+Before reading DIFF, please make sure to read comments in the beginning of hp_dspace.c or in DesignDetails. It contains design description, as well as a list of open issues. 
+
+You may also want to look at the [http://lists.mysql.com/internals/35385 MySQL Internals Thread] where Sergei and I discussed some elements of the design. 
