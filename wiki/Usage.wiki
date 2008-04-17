@@ -1,0 +1,32 @@
+#labels Featured
+=Using Dynamic Row Format=
+
+The new feature is exposed through block_size and row format options.
+
+For example:
+
+{{{
+create table t1 (
+    a int not null,
+    b int,
+    c varchar(400),
+    d varchar(400),
+    primary key (a), key (b))
+  engine=heap block_size=24;
+}}}
+
+{{{
+create table t1 (
+    a int not null,
+    b int,
+    c varchar(400),
+    d varchar(400),
+    primary key (a), key (b))
+  engine=heap row_format=dynamic;
+}}}
+
+Note that {{{row_format=dynamic}}} will use {{{block_size}}} of 240.
+
+Use {{{"show table status"}}} to find average per-row memory consumption. Note that in a table with few rows, per-row memory consumption will show high numbers due to larger {{{HP_BLOCK}}} allocation granularity.
+
+As always, don't forget to set {{{max_heap_table_size}}} and {{{max_rows}}} properly.
