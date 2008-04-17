@@ -44,6 +44,8 @@ Variable-size uses different format:
 When allocating a new chunkset of N chunks, Heap Engine will try to allocate chunks one-by-one, linking them as they become allocated. Allocation of a single chunk will attempt to reuse a deleted (freed) chunk. If no free chunks are available, it will attempt to allocate a new area inside {{{HP_BLOCK}}}. Freeing chunks will place them at the front of free list referenced by del_link in {{{HP_DATASPACE}}}. The newly freed chunk will contain reference to the previously freed chunk in its first {{{sizeof(byte*)}}} of the payload space.
 
 ==Open issues==
+
+Here is the list of open issues:
   # It is not very nice to require people to keep key columns at the beginning of the table creation SQL. There are three proposed resolutions:
     * Leave it as is. It's a reasonable limitation
     * Add new {{{HA_KEEP_KEY_COLUMNS_TO_FRONT}}} flag to handler.h and make table.cpp align columns when it creates the table
