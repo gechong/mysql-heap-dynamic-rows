@@ -46,12 +46,12 @@ When allocating a new chunkset of N chunks, Heap Engine will try to allocate chu
 ==Open issues==
 
 Here is the list of open issues:
-  # It is not very nice to require people to keep key columns at the beginning of the table creation SQL. There are three proposed resolutions:
-    * Leave it as is. It's a reasonable limitation
-    * Add new {{{HA_KEEP_KEY_COLUMNS_TO_FRONT}}} flag to handler.h and make table.cpp align columns when it creates the table
-    * Make HeapEngine reorder columns in the chunk data, so that key columns go first. Add parallel {{{HA_KEYSEG}}} structures to distinguish positions in record vs. positions in the first chunk. Copy all data field-by-field rather than using single memcpy unless DBA kept key columns to the beginning.
-  # {{{heap_check_heap}}} needs verify linked chunks, looking for issues such as orphans, cycles, and bad links. However, Heap Engine today does not do similar things even for free list.
-  # With new {{{HP_DATASPACE}}} allocation mechaism, BLOB will become increasingly simple to implement, but I may not have time for that. In one approach, BLOB data can be placed at the end of the same record. In another approach (which I prefer) BLOB data would have its own {{{HP_DATASPACE}}} with variable-size entries.
-  # In a more sophisticated implementation, some space can be saved even with all fixed-size columns if many of them have NULL value, as long as these columns are not used in indexes
-  # In variable-size format status should be moved to lower bits of the "next" pointer. Pointer is always aligned to {{{sizeof(byte*)}}}, which is at least 4, leaving 2 lower bits free. This will save 8 bytes per chunk on 64-bit platform.
-  # As we do not want to modify FRM format, BLOCK_SIZE option of "CREATE TABLE" is saved as "RAID_CHUNKSIZE" for Heap Engine tables.
+ # It is not very nice to require people to keep key columns at the beginning of the table creation SQL. There are three proposed resolutions:
+  * Leave it as is. It's a reasonable limitation
+  * Add new {{{HA_KEEP_KEY_COLUMNS_TO_FRONT}}} flag to handler.h and make table.cpp align columns when it creates the table
+  * Make HeapEngine reorder columns in the chunk data, so that key columns go first. Add parallel {{{HA_KEYSEG}}} structures to distinguish positions in record vs. positions in the first chunk. Copy all data field-by-field rather than using single memcpy unless DBA kept key columns to the beginning.
+ # {{{heap_check_heap}}} needs verify linked chunks, looking for issues such as orphans, cycles, and bad links. However, Heap Engine today does not do similar things even for free list.
+ # With new {{{HP_DATASPACE}}} allocation mechaism, BLOB will become increasingly simple to implement, but I may not have time for that. In one approach, BLOB data can be placed at the end of the same record. In another approach (which I prefer) BLOB data would have its own {{{HP_DATASPACE}}} with variable-size entries.
+ # In a more sophisticated implementation, some space can be saved even with all fixed-size columns if many of them have NULL value, as long as these columns are not used in indexes
+ # In variable-size format status should be moved to lower bits of the "next" pointer. Pointer is always aligned to {{{sizeof(byte*)}}}, which is at least 4, leaving 2 lower bits free. This will save 8 bytes per chunk on 64-bit platform.
+ # As we do not want to modify FRM format, BLOCK_SIZE option of "CREATE TABLE" is saved as "RAID_CHUNKSIZE" for Heap Engine tables.
