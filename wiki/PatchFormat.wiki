@@ -5,4 +5,4 @@ Attached ZIP (see [http://code.google.com/p/mysql-heap-dynamic-rows/downloads/li
 
 Before reading DIFF, please make sure to read comments in the beginning of hp_dspace.c or in DesignDetails. It contains design description, as well as a list of open issues. 
 
-You may also want to look at the [http://lists.mysql.com/internals/35385 MySQL Internals Thread] where Sergei and I discussed some elements of the design. 
+You may also want to look at the [http://lists.mysql.com/internals/35491 MySQL Internals Thread] where Sergei and I discussed some elements of the design. 
